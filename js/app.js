@@ -27,10 +27,17 @@ function shuffle(array) {
 
 
 var allTheCards = document.querySelectorAll('.card');
+var cardArray = [];
 
 allTheCards.forEach(function(card) {
     card.addEventListener('click', function(event) {
-        card.classList.add('open', 'show');
+        if (cardArray.length === 2) {
+
+        } else {
+            cardArray.push(card);
+            card.classList.add('open', 'show');
+        }
+        
     })
 })
 
