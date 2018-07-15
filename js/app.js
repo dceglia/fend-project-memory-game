@@ -29,17 +29,15 @@ function shuffle(array) {
 var allTheCards = document.querySelectorAll('.card');
 var cardArray = [];
 
-allTheCards.forEach(function(card) {
-    card.addEventListener('click', function(event) {
-        if (cardArray.length === 2) {
+flipCards();
 
-        } else {
-            cardArray.push(card);
+function flipCards() {
+    allTheCards.forEach(function(card) {
+        card.addEventListener('click', function(event) {
             card.classList.add('open', 'show');
-        }
-        
-    })
-})
+        });
+    });
+};
 
 /*
  * set up the event listener for a card. If a card is clicked:
