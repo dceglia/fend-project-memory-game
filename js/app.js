@@ -42,14 +42,29 @@ function addToArray () {
     allTheCards.forEach(function(card) {
         card.addEventListener('click', function(event){
             cardArray.push(card);
-            console.log("card length", cardArray.length);
         });
     });
 };
 
+function hideCards () {
+    allTheCards.forEach(function(card) {
+        card.addEventListener('click', function(event) {
+            if (cardArray.length == 2) {
+                setTimeout(function() {
+                    cardArray.forEach(function(card) {
+                        card.classList.remove('open', 'show');
+                    });
+                    cardArray = [];
+                }, 850);
+            }
+        })
+    });
+}
+
 function beginGame() {
     flipCards();
     addToArray();
+    hideCards();
 };
 
 /*
