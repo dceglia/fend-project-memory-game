@@ -1,6 +1,3 @@
-/*
- * Create a list that holds all of your cards
- */
 
 
 /*
@@ -29,7 +26,9 @@ function shuffle(array) {
 var allTheCards = document.querySelectorAll('.card');
 var cardArray = [];
 
-flipCards();
+beginGame();
+
+
 
 function flipCards() {
     allTheCards.forEach(function(card) {
@@ -37,6 +36,20 @@ function flipCards() {
             card.classList.add('open', 'show');
         });
     });
+};
+
+function addToArray () {
+    allTheCards.forEach(function(card) {
+        card.addEventListener('click', function(event){
+            cardArray.push(card);
+            console.log("card length", cardArray.length);
+        });
+    });
+};
+
+function beginGame() {
+    flipCards();
+    addToArray();
 };
 
 /*
