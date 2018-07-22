@@ -25,7 +25,7 @@ function shuffle(array) {
     return array;
 }
 
-
+var cardArray = [];
 var deck = document.querySelector('.deck');
 
 function clickCard(click) {
@@ -33,10 +33,16 @@ function clickCard(click) {
     click.classList.add('show');
 }
 
+function addClickedCard(click) {
+    cardArray.push(click);
+    console.log(cardArray);
+}
+
 deck.addEventListener('click', function(event) {
     let click = event.target;
     if (click.classList.contains('card')) {
         clickCard(click);
+        addClickedCard(click);
     }
 });
 
