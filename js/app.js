@@ -26,6 +26,20 @@ function shuffle(array) {
 }
 
 
+var deck = document.querySelector('.deck');
+
+function clickCard(click) {
+    click.classList.add('open');
+    click.classList.add('show');
+}
+
+deck.addEventListener('click', function(event) {
+    let click = event.target;
+    if (click.classList.contains('card')) {
+        clickCard(click);
+    }
+});
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
