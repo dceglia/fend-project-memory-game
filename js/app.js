@@ -38,11 +38,22 @@ function addClickedCard(click) {
     console.log(cardArray);
 }
 
+function matchLogic() {
+    if (cardArray[0].firstElementChild.className === cardArray[1].firstElementChild.className) {
+        console.log('match');
+    } else {
+        console.log('not match');
+    }
+}
+
 deck.addEventListener('click', function(event) {
     let click = event.target;
-    if (click.classList.contains('card')) {
+    if (click.classList.contains('card') && cardArray.length < 2) {
         clickCard(click);
         addClickedCard(click);
+        if (cardArray.length === 2) {
+            matchLogic();
+        }
     }
 });
 
