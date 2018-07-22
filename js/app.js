@@ -38,11 +38,20 @@ function addClickedCard(click) {
     console.log(cardArray);
 }
 
+function hideCard(click) {
+    click.classList.remove('open');
+    click.classList.remove('show');
+}
+
 function matchLogic() {
     if (cardArray[0].firstElementChild.className === cardArray[1].firstElementChild.className) {
-        console.log('match');
+        cardArray[0].classList.add('match');
+        cardArray[1].classList.add('match');
+        cardArray = [];
     } else {
-        console.log('not match');
+        hideCard(cardArray[0]);
+        hideCard(cardArray[1]);
+        cardArray = [];
     }
 }
 
