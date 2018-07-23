@@ -59,11 +59,11 @@ function matchLogic() {
 
 deck.addEventListener('click', function(event) {
     let click = event.target;
-    if (click.classList.contains('card') && cardArray.length < 2) {
+    if (click.classList.contains('card') && cardArray.length < 2 && !click.classList.contains('open') && !click.classList.contains('show') && !click.classList.contains('match')) {
         clickCard(click);
         addClickedCard(click);
         if (cardArray.length === 2) {
-            matchLogic();
+            matchLogic(click);
         }
     }
 });
