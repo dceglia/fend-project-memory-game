@@ -49,9 +49,11 @@ function matchLogic() {
         cardArray[1].classList.add('match');
         cardArray = [];
     } else {
-        hideCard(cardArray[0]);
-        hideCard(cardArray[1]);
-        cardArray = [];
+        setTimeout(function() {
+            hideCard(cardArray[0]);
+            hideCard(cardArray[1]);
+            cardArray = [];
+        },1250);
     }
 }
 
