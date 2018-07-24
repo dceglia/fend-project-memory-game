@@ -27,6 +27,7 @@ function shuffle(array) {
 
 var cardArray = [];
 var deck = document.querySelector('.deck');
+var card = document.querySelector('.card');
 
 function clickCard(click) {
     click.classList.add('open');
@@ -56,6 +57,16 @@ function matchLogic() {
         },1250);
     }
 }
+
+function shuffleTheDeck () {
+    var unshuffled = [].slice.call(document.querySelectorAll('.deck li'));
+    var shuffled = shuffle(unshuffled);
+    for (card of shuffled) {
+        deck.appendChild(card);
+    }
+}
+
+shuffleTheDeck();
 
 deck.addEventListener('click', function(event) {
     let click = event.target;
