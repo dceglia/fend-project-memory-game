@@ -10,24 +10,13 @@
  *   - add each card's HTML to the page
  */
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
 
 var cardArray = [];
 var deck = document.querySelector('.deck');
 var card = document.querySelector('.card');
+var attemptCounter = document.querySelector('.attempts');
+var attempts = 0;
 
 function clickCard(click) {
     click.classList.add('open');
@@ -36,7 +25,6 @@ function clickCard(click) {
 
 function addClickedCard(click) {
     cardArray.push(click);
-    console.log(cardArray);
 }
 
 function hideCard(click) {
@@ -58,12 +46,32 @@ function matchLogic() {
     }
 }
 
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
 function shuffleTheDeck () {
     var unshuffled = [].slice.call(document.querySelectorAll('.deck li'));
     var shuffled = shuffle(unshuffled);
     for (card of shuffled) {
         deck.appendChild(card);
     }
+}
+
+function incrementCounter() {
+    attempts++;
+    attemptCounter.innerHTML = attempts;
 }
 
 shuffleTheDeck();
@@ -75,6 +83,7 @@ deck.addEventListener('click', function(event) {
         addClickedCard(click);
         if (cardArray.length === 2) {
             matchLogic(click);
+            incrementCounter();
         }
     }
 });
