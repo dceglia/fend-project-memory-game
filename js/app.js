@@ -16,7 +16,9 @@ var cardArray = [];
 var deck = document.querySelector('.deck');
 var card = document.querySelector('.card');
 var attemptCounter = document.querySelector('.attempts');
+var stars = document.querySelector('.stars li');
 var attempts = 0;
+var timer = document.getElementById('game-timer');
 
 function clickCard(click) {
     click.classList.add('open');
@@ -74,6 +76,87 @@ function incrementCounter() {
     attemptCounter.innerHTML = attempts;
 }
 
+// StopWatch function from https://github.com/ryanwaite28/script-store/blob/master/js/stop-watch.js
+const StopWatch = function StopWatch() {
+    const self = this;
+  
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+  
+    let timer;
+    let on = false;
+  
+    self.startTimer = function(callback) {
+      if(on === true) { return; }
+      on = true;
+      timer = setInterval(function(){
+        seconds++;
+        if(seconds === 60) {
+          seconds = 0;
+          minutes++;
+          if(minutes === 60) {
+            minutes = 0;
+            hours++;
+          }
+        }
+        if(callback && callback.constructor === Function) {
+          callback();
+        }
+      }, 1000);
+      console.log('timer started');
+    }
+  
+    self.stopTimer = function() {
+      clearInterval(timer);
+      on = false;
+      console.log('timer ended: ', self.getTimeString());
+    }
+  
+    self.resetTimer = function() {
+      self.stopTimer();
+      hours = 0;
+      minutes = 0;
+      seconds = 0;
+    }
+  
+    self.getTimeString = function() {
+      let hour = hours > 9 ? String(hours) : '0' + String(hours);
+      let minute = minutes > 9 ? String(minutes) : '0' + String(minutes);
+      let second = seconds > 9 ? String(seconds) : '0' + String(seconds);
+      let timeString = hour + ':' + minute + ':' + second;
+      return timeString;
+    }
+  
+    self.getHours = function() {
+      return hours;
+    }
+  
+    self.getMinutes = function() {
+      return minutes;
+    }
+  
+    self.getSeconds = function() {
+      return seconds;
+    }
+}
+
+let watch = new StopWatch();
+
+function startGameTimer() {
+    watch.startTimer(function() {
+        timer.innerText = watch.getTimeString();
+    });
+}
+
+// ==================================================================
+// need to create stopGameTimer() at game win
+// ==================================================================
+
+// function starRating() {
+
+// }
+
 shuffleTheDeck();
 
 deck.addEventListener('click', function(event) {
@@ -81,6 +164,7 @@ deck.addEventListener('click', function(event) {
     if (click.classList.contains('card') && cardArray.length < 2 && !click.classList.contains('open') && !click.classList.contains('show') && !click.classList.contains('match')) {
         clickCard(click);
         addClickedCard(click);
+        startGameTimer();
         if (cardArray.length === 2) {
             matchLogic(click);
             incrementCounter();
