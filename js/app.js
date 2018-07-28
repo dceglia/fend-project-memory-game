@@ -16,7 +16,6 @@ var cardArray = [];
 var deck = document.querySelector('.deck');
 var card = document.querySelector('.card');
 var attemptCounter = document.querySelector('.attempts');
-var stars = document.querySelector('.stars li');
 var attempts = 0;
 var timer = document.getElementById('game-timer');
 
@@ -153,9 +152,19 @@ function startGameTimer() {
 // need to create stopGameTimer() at game win
 // ==================================================================
 
-// function starRating() {
-
+// function stopGameTimer() {
+//     watch.stopTimer();
 // }
+
+function starRating() {
+    if (attempts >= 12 && attempts <18) {
+        document.getElementById('firstStar').style.display = 'none';
+    } else if (attempts >= 19 && attempts <25) {
+        document.getElementById('secondStar').style.display = 'none';
+    } else if (attempts >= 26) {
+        document.getElementById('finalStar').style.display = 'none';
+    }
+}
 
 shuffleTheDeck();
 
@@ -165,6 +174,7 @@ deck.addEventListener('click', function(event) {
         clickCard(click);
         addClickedCard(click);
         startGameTimer();
+        starRating();
         if (cardArray.length === 2) {
             matchLogic(click);
             incrementCounter();
