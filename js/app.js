@@ -148,13 +148,9 @@ function startGameTimer() {
     });
 }
 
-// ==================================================================
-// need to create stopGameTimer() at game win
-// ==================================================================
-
-// function stopGameTimer() {
-//     watch.stopTimer();
-// }
+function stopGameTimer() {
+    watch.stopTimer();
+}
 
 function starRating() {
     if (attempts >= 12 && attempts <18) {
@@ -185,6 +181,7 @@ function modalStarCounter() {
 
 function showModal() {
     modal.showModal();
+    stopGameTimer();
 
     var modalTime = document.querySelector('#modal-time');
     modalTime.innerHTML = 'Time Taken: ' + watch.getTimeString();
