@@ -18,6 +18,7 @@ var card = document.querySelector('.card');
 var attemptCounter = document.querySelector('.attempts');
 var attempts = 0;
 var timer = document.getElementById('game-timer');
+var modal = document.querySelector("#modal");
 
 function clickCard(click) {
     click.classList.add('open');
@@ -103,7 +104,6 @@ const StopWatch = function StopWatch() {
           callback();
         }
       }, 1000);
-      console.log('timer started');
     }
   
     self.stopTimer = function() {
@@ -164,6 +164,40 @@ function starRating() {
     } else if (attempts >= 26) {
         document.getElementById('finalStar').style.display = 'none';
     }
+}
+
+function modalStarCounter() {
+    var three = 3;
+    var two = 2;
+    var one = 1;
+    var zero = 0;
+
+    if (attempts < 11) {
+        return three;
+    } else if (attempts >= 12 && attempts <18) {
+        return two;
+    } else if (attempts >= 19 && attempts <25) {
+        return one;
+    } else if (attempts >= 26) {
+        return zero;
+    }
+}
+
+function showModal() {
+    modal.showModal();
+
+    var modalTime = document.querySelector('#modal-time');
+    modalTime.innerHTML = 'Time Taken: ' + watch.getTimeString();
+
+    var modalStars = document.querySelector('#modal-stars');
+    modalStars.innerHTML = 'Star Rating: ' + modalStarCounter();
+
+    var modalCounter = document.querySelector('#modal-counter');
+    modalCounter.innerHTML = "# of Flips: " + attempts;
+}
+
+function closeModal() {
+    modal.close();
 }
 
 shuffleTheDeck();

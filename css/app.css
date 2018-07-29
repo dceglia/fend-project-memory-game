@@ -107,3 +107,43 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+#modal {
+    box-shadow: 0px 12px 12px 1px #888888;
+    width: 400px;
+    height: 310px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#modal-title {
+    text-align: center;
+    border-bottom: 2px solid black;
+}
+
+.modal-results {
+    margin-left: 20px;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover {
+    color:red;
+    cursor: pointer;
+  }
+
+.modal-buttons {
+    border-top: 2px solid black;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+}
