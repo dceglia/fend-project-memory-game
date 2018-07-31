@@ -223,17 +223,13 @@ function resetAttempts() {
     document.querySelector('.attempts').innerHTML = attempts;
 }
 
-// ===========================
-// create function for reseting clock
-// ==========================
-
-// function resetTime() {
-//     let watch = new StopWatch();
-
-//         watch.resetTimer(function() {
-//             timer.innerText = watch.getTimeString();
-//         })
-// }
+// way to reset the game timer
+function resetTime() {
+    timer.innerText = '00:00:00';
+    watch.resetTimer(function() {
+        timer.innerText = watch.getTimeString();
+    });
+}
 
 // ===========================
 // create function for reseting resetting Stars
@@ -243,15 +239,13 @@ function resetAttempts() {
 
 // }
 
-// function resetGame() {
-//     stopGameTimer();
-//     resetTime();
-//     resetAttempts();
-//     // resetStars();
-//     shuffleTheDeck();
-// }
-
-// document.querySelector('.restart').addEventListener('click', resetGame);
+function resetGame() {
+    closeModal();
+    resetTime();
+    resetAttempts();
+    // resetStars();
+    shuffleTheDeck();
+}
 
 shuffleTheDeck();
 
