@@ -7,15 +7,24 @@
  */
 
 
+
+/* Thanks to Mike Wales and Ryan Waite for their P2 webinars - referenced repetitively */
+
 // empty array to load cards in
 var cardArray = [];
+
+// variables to gain HTML access
 var deck = document.querySelector('.deck');
 var card = document.querySelector('.card');
 var attemptCounter = document.querySelector('.attempts');
-var attempts = 0;
 var timer = document.querySelector('.game-timer');
 var modal = document.querySelector("#modal");
 
+// setting player attempts at 0 to start... guess I could be mean and change that
+var attempts = 0;
+
+/* referenced Udacity Scholar Matt Cranford's walkthrough
+   https://matthewcranford.com/memory-game-walkthrough-part-1-setup/ */
 function clickCard(click) {
     click.classList.add('open');
     click.classList.add('show');
@@ -44,8 +53,8 @@ function matchLogic() {
     }
 }
 
-// Udacity provided shuffle function
-// Shuffle function from http://stackoverflow.com/a/2450976
+/* Udacity provided shuffle function
+   Shuffle function from http://stackoverflow.com/a/2450976 */
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -60,6 +69,7 @@ function shuffle(array) {
     return array;
 }
 
+// shuffling the cards using the provided shuffle()
 function shuffleTheDeck () {
     var unshuffled = [].slice.call(document.querySelectorAll('.deck li'));
     var shuffled = shuffle(unshuffled);
@@ -74,8 +84,8 @@ function incrementCounter() {
     attemptCounter.innerHTML = attempts;
 }
 
-// StopWatch function from Udacity scholar Ryan Waite's "Script Store" 
-// https://github.com/ryanwaite28/script-store/blob/master/js/stop-watch.js
+/* StopWatch function from Udacity scholar Ryan Waite's "Script Store" 
+   https://github.com/ryanwaite28/script-store/blob/master/js/stop-watch.js */
 const StopWatch = function StopWatch() {
     const self = this;
   
@@ -186,8 +196,8 @@ function modalStarCounter() {
     }
 }
 
-// modal window w/ game results - referenced Udacity scholar Sachin's "Modal Box"
-// https://codepen.io/sachin03/pen/XYgLWP?editors=1010
+/* modal window w/ game results - referenced Udacity scholar Sachin's "Modal Box"
+   https://codepen.io/sachin03/pen/XYgLWP?editors=1010 */
 function showModal() {
     modal.showModal();
     stopGameTimer();
@@ -207,7 +217,7 @@ function closeModal() {
     modal.close();
 }
 
-// way to reset the players # of attempts counter
+// way to reset the attempts counter
 function resetAttempts() {
     attempts = 0;
     document.querySelector('.attempts').innerHTML = attempts;
