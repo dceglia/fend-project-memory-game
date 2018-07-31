@@ -167,14 +167,16 @@ function stopGameTimer() {
     });
 }
 
-// graphical star representation of how well the player did
+/* graphical star representation of how well the player did
+   thanks to Asmaa & drunkenkismet on Slack for #fend_live_help posts - 
+   https://github.com/Zasmaa/memory-game-project-2/blob/master/JS/app.js */
 function starRating() {
     if (attempts >= 12 && attempts <18) {
         document.getElementById('firstStar').style.display = 'none';
     } else if (attempts >= 19 && attempts <25) {
         document.getElementById('secondStar').style.display = 'none';
     } else if (attempts >= 26) {
-        document.getElementById('finalStar').style.display = 'none';
+        document.getElementById('thirdStar').style.display = 'none';
     }
 }
 
@@ -231,19 +233,23 @@ function resetTime() {
     });
 }
 
-// ===========================
-// create function for reseting resetting Stars
-// ==========================
+// resets to 3 stars when invoked
+function resetStars() {
+    if (document.getElementById('firstStar').style.display === 'none' || 
+        document.getElementById('secondStar').style.display === 'none' ||
+        document.getElementById('finalStar').style.display === 'none') {
 
-// function resetStars() {
-
-// }
+        document.getElementById('firstStar').style.display = 'inline';
+        document.getElementById('secondStar').style.display = 'inline';
+        document.getElementById('finalStar').style.display = 'inline';
+    } 
+}
 
 function resetGame() {
     closeModal();
     resetTime();
     resetAttempts();
-    // resetStars();
+    resetStars();
     shuffleTheDeck();
 }
 
