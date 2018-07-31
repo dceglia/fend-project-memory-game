@@ -129,9 +129,14 @@ h1 {
     color: #aaa;
     position: absolute;
     top: 15px;
-    right: 35px;
-    font-size: 35px;
+    right: 25px;
+    font-size: 20px;
     font-weight: bold;
+}
+
+.close-modal:hover {
+    color: #02b3e4;
+    cursor: default;
 }
 
 .modal-buttons {

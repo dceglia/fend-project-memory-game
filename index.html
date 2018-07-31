@@ -33,15 +33,15 @@
 
         <dialog id="modal">
             <h2 id="modal-title">Congratulations!</h2>
-            <span id="modal-time"></span>
+            <span class="modal-results" id="modal-time"></span>
             <br></br>
-            <span id="modal-stars"></span>
+            <span class="modal-results" id="modal-stars"></span>
             <br></br>
-            <span id="modal-counter"></span>
+            <span class="modal-results" id="modal-counter"></span>
             <br></br>
             <div class="modal-buttons">
                 <button class="modal-replay">Replay</button>
-                <button class="modal-cancel" id="btnCancel">Cancel</button>
+                <button id="btnCancel" onclick="closeModal()">Cancel</button>
             </div>
             <span class="close-modal" onclick="closeModal()">X</span>
         </dialog>
