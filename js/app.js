@@ -233,7 +233,9 @@ function resetTime() {
     });
 }
 
-// resets to 3 stars when invoked
+/* resets to 3 stars when invoked
+   referenced W3 schools jsref for display properties- 
+   https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_style_display_toggle */
 function resetStars() {
     if (document.getElementById('firstStar').style.display === 'none' || 
         document.getElementById('secondStar').style.display === 'none' ||
