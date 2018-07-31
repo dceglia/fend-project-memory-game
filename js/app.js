@@ -1,7 +1,3 @@
-/*
- * Create a list that holds all of your cards
- */
-
 
 /*
  * Display the cards on the page
@@ -11,13 +7,13 @@
  */
 
 
-
+// empty array to load cards in
 var cardArray = [];
 var deck = document.querySelector('.deck');
 var card = document.querySelector('.card');
 var attemptCounter = document.querySelector('.attempts');
 var attempts = 0;
-var timer = document.getElementById('game-timer');
+var timer = document.querySelector('.game-timer');
 var modal = document.querySelector("#modal");
 
 function clickCard(click) {
@@ -48,6 +44,7 @@ function matchLogic() {
     }
 }
 
+// Udacity provided shuffle function
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -71,12 +68,14 @@ function shuffleTheDeck () {
     }
 }
 
+// function to change the players attempts at matches and increment the counter up
 function incrementCounter() {
     attempts++;
     attemptCounter.innerHTML = attempts;
 }
 
-// StopWatch function from https://github.com/ryanwaite28/script-store/blob/master/js/stop-watch.js
+// StopWatch function from Udacity scholar Ryan Waite's "Script Store" 
+// https://github.com/ryanwaite28/script-store/blob/master/js/stop-watch.js
 const StopWatch = function StopWatch() {
     const self = this;
   
@@ -104,6 +103,7 @@ const StopWatch = function StopWatch() {
           callback();
         }
       }, 1000);
+      console.log('timer started');
     }
   
     self.stopTimer = function() {
@@ -140,18 +140,24 @@ const StopWatch = function StopWatch() {
     }
 }
 
+// creation of a new instance of the StopWatch() function
 let watch = new StopWatch();
 
+// function to begin the timer and output the time in the HTML
 function startGameTimer() {
     watch.startTimer(function() {
         timer.innerText = watch.getTimeString();
     });
 }
 
+// function to stop the timer and output the time in HTML
 function stopGameTimer() {
-    watch.stopTimer();
+    watch.stopTimer(function() {
+        timer.innerText = watch.getTimeString();
+    });
 }
 
+// graphical star representation of how well the player did
 function starRating() {
     if (attempts >= 12 && attempts <18) {
         document.getElementById('firstStar').style.display = 'none';
@@ -162,6 +168,7 @@ function starRating() {
     }
 }
 
+// translation of the # of stars received into numerical text in the modal
 function modalStarCounter() {
     var three = 3;
     var two = 2;
@@ -179,6 +186,8 @@ function modalStarCounter() {
     }
 }
 
+// modal window w/ game results - referenced Udacity scholar Sachin's "Modal Box"
+// https://codepen.io/sachin03/pen/XYgLWP?editors=1010
 function showModal() {
     modal.showModal();
     stopGameTimer();
@@ -193,9 +202,46 @@ function showModal() {
     modalCounter.innerHTML = "# of Flips: " + attempts;
 }
 
+// function to close the modal 
 function closeModal() {
     modal.close();
 }
+
+// way to reset the players # of attempts counter
+function resetAttempts() {
+    attempts = 0;
+    document.querySelector('.attempts').innerHTML = attempts;
+}
+
+// ===========================
+// create function for reseting clock
+// ==========================
+
+// function resetTime() {
+//     let watch = new StopWatch();
+
+//         watch.resetTimer(function() {
+//             timer.innerText = watch.getTimeString();
+//         })
+// }
+
+// ===========================
+// create function for reseting resetting Stars
+// ==========================
+
+// function resetStars() {
+
+// }
+
+// function resetGame() {
+//     stopGameTimer();
+//     resetTime();
+//     resetAttempts();
+//     // resetStars();
+//     shuffleTheDeck();
+// }
+
+// document.querySelector('.restart').addEventListener('click', resetGame);
 
 shuffleTheDeck();
 

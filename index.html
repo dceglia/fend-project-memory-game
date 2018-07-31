@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -13,7 +14,7 @@
     <div class="container">
         <header>
             <h1>Matching Game</h1>
-            <h5 id="game-timer">00:00:00</h5>
+            <h5 class="game-timer">00:00:00</h5>
         </header>
 
         <section class="score-panel">
@@ -32,17 +33,17 @@
 
         <dialog id="modal">
             <h2 id="modal-title">Congratulations!</h2>
-            <span class="modal-results" id="modal-time"></span>
+            <span id="modal-time"></span>
             <br></br>
-            <span class="modal-results" id="modal-stars"></span>
+            <span id="modal-stars"></span>
             <br></br>
-            <span class="modal-results" id="modal-counter"></span>
+            <span id="modal-counter"></span>
             <br></br>
             <div class="modal-buttons">
                 <button class="modal-replay">Replay</button>
-                <button class="modal-cancel">Cancel</button>
+                <button class="modal-cancel" id="btnCancel">Cancel</button>
             </div>
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close-modal" onclick="closeModal()">X</span>
         </dialog>
 
         <ul class="deck">
