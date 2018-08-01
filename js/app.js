@@ -1,27 +1,17 @@
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+/* Thanks to Mike Wales and Ryan Waite for their P2 webinars - 
+   referenced repetitively!! */
 
-
-
-/* Thanks to Mike Wales and Ryan Waite for their P2 webinars - referenced repetitively */
-
-// empty array to load cards in
 var cardArray = [];
 
-// variables to gain HTML access
 var deck = document.querySelector('.deck');
 var card = document.querySelector('.card');
 var attemptCounter = document.querySelector('.attempts');
 var timer = document.querySelector('.game-timer');
 var modal = document.querySelector("#modal");
 
-// setting player attempts at 0 to start... guess I could be mean and change that
 var attempts = 0;
+allMatches = 0;
 
 /* referenced Udacity Scholar Matt Cranford's walkthrough
    https://matthewcranford.com/memory-game-walkthrough-part-1-setup/ */
@@ -44,6 +34,7 @@ function matchLogic() {
         cardArray[0].classList.add('match');
         cardArray[1].classList.add('match');
         cardArray = [];
+        incrementMatch();
     } else {
         setTimeout(function() {
             hideCard(cardArray[0]);
@@ -69,7 +60,6 @@ function shuffle(array) {
     return array;
 }
 
-// shuffling the cards using the provided shuffle()
 function shuffleTheDeck () {
     var unshuffled = [].slice.call(document.querySelectorAll('.deck li'));
     var shuffled = shuffle(unshuffled);
@@ -78,7 +68,6 @@ function shuffleTheDeck () {
     }
 }
 
-// function to change the players attempts at matches and increment the counter up
 function incrementCounter() {
     attempts++;
     attemptCounter.innerHTML = attempts;
@@ -150,55 +139,45 @@ const StopWatch = function StopWatch() {
     }
 }
 
-// creation of a new instance of the StopWatch() function
 let watch = new StopWatch();
 
-// function to begin the timer and output the time in the HTML
 function startGameTimer() {
     watch.startTimer(function() {
         timer.innerText = watch.getTimeString();
     });
 }
 
-// function to stop the timer and output the time in HTML
 function stopGameTimer() {
     watch.stopTimer(function() {
         timer.innerText = watch.getTimeString();
     });
 }
 
-/* graphical star representation of how well the player did
-   thanks to Asmaa & drunkenkismet on Slack for #fend_live_help posts - 
+/* thanks to Asmaa & drunkenkismet on Slack for #fend_live_help posts - 
    https://github.com/Zasmaa/memory-game-project-2/blob/master/JS/app.js */
 function starRating() {
-    if (attempts >= 12 && attempts <18) {
+    if (attempts >= 18 && attempts < 25) {
         document.getElementById('firstStar').style.display = 'none';
-    } else if (attempts >= 19 && attempts <25) {
-        document.getElementById('secondStar').style.display = 'none';
     } else if (attempts >= 26) {
-        document.getElementById('thirdStar').style.display = 'none';
+        document.getElementById('secondStar').style.display = 'none';
     }
 }
 
-// translation of the # of stars received into numerical text in the modal
 function modalStarCounter() {
     var three = 3;
     var two = 2;
     var one = 1;
-    var zero = 0;
 
-    if (attempts < 11) {
+    if (attempts <= 17) {
         return three;
-    } else if (attempts >= 12 && attempts <18) {
+    } else if (attempts >= 18 && attempts < 25) {
         return two;
-    } else if (attempts >= 19 && attempts <25) {
-        return one;
     } else if (attempts >= 26) {
-        return zero;
+        return one;
     }
 }
 
-/* modal window w/ game results - referenced Udacity scholar Sachin's "Modal Box"
+/* referenced Udacity scholar Sachin's "Modal Box" from P2 resources -
    https://codepen.io/sachin03/pen/XYgLWP?editors=1010 */
 function showModal() {
     modal.showModal();
@@ -214,18 +193,15 @@ function showModal() {
     modalCounter.innerHTML = "# of Flips: " + attempts;
 }
 
-// function to close the modal 
 function closeModal() {
     modal.close();
 }
 
-// way to reset the attempts counter
 function resetAttempts() {
     attempts = 0;
     document.querySelector('.attempts').innerHTML = attempts;
 }
 
-// way to reset the game timer
 function resetTime() {
     timer.innerText = '00:00:00';
     watch.resetTimer(function() {
@@ -233,18 +209,24 @@ function resetTime() {
     });
 }
 
-/* resets to 3 stars when invoked
-   referenced W3 schools jsref for display properties- 
-   https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_style_display_toggle */
 function resetStars() {
     if (document.getElementById('firstStar').style.display === 'none' || 
-        document.getElementById('secondStar').style.display === 'none' ||
-        document.getElementById('finalStar').style.display === 'none') {
+        document.getElementById('secondStar').style.display === 'none') {
 
         document.getElementById('firstStar').style.display = 'inline';
         document.getElementById('secondStar').style.display = 'inline';
-        document.getElementById('finalStar').style.display = 'inline';
-    } 
+    }
+}
+
+function incrementMatch () {
+    allMatches += 1;
+    win();
+}
+
+function win() {
+    if (allMatches == 8) {
+        showModal();
+    }
 }
 
 function resetGame() {
@@ -258,26 +240,23 @@ function resetGame() {
 shuffleTheDeck();
 
 deck.addEventListener('click', function(event) {
+
     let click = event.target;
-    if (click.classList.contains('card') && cardArray.length < 2 && !click.classList.contains('open') && !click.classList.contains('show') && !click.classList.contains('match')) {
+
+    if (click.classList.contains('card') && cardArray.length < 2 && 
+        !click.classList.contains('open') &&
+        !click.classList.contains('show') &&
+        !click.classList.contains('match')) {
+
         clickCard(click);
         addClickedCard(click);
         startGameTimer();
         starRating();
+
         if (cardArray.length === 2) {
             matchLogic(click);
             incrementCounter();
         }
     }
+    win();
 });
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
