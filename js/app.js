@@ -2,33 +2,41 @@
 /* Thanks to Mike Wales and Ryan Waite for their P2 webinars - 
    referenced repetitively!! */
 
+// empty array to load cards in
 var cardArray = [];
 
+// variables to select DOM elements
 var deck = document.querySelector('.deck');
 var card = document.querySelector('.card');
 var attemptCounter = document.querySelector('.attempts');
 var timer = document.querySelector('.game-timer');
 var modal = document.querySelector("#modal");
 
+// creating variables and setting to 0
 var attempts = 0;
-allMatches = 0;
+var allMatches = 0;
 
 /* referenced Udacity Scholar Matt Cranford's walkthrough
-   https://matthewcranford.com/memory-game-walkthrough-part-1-setup/ */
+   https://matthewcranford.com/memory-game-walkthrough-part-1-setup/ 
+   method for flipping cards over*/
 function clickCard(click) {
     click.classList.add('open');
     click.classList.add('show');
 }
 
+// method to push to the array
 function addClickedCard(click) {
     cardArray.push(click);
 }
 
+// method to flip cards face down
 function hideCard(click) {
     click.classList.remove('open');
     click.classList.remove('show');
 }
 
+/* method to distinguish between matches (by adding the match class) 
+   and cards that need flipped back over due to no match */
 function matchLogic() {
     if (cardArray[0].firstElementChild.className === cardArray[1].firstElementChild.className) {
         cardArray[0].classList.add('match');
@@ -60,6 +68,7 @@ function shuffle(array) {
     return array;
 }
 
+// implementing shuffle() on the deck
 function shuffleTheDeck () {
     var unshuffled = [].slice.call(document.querySelectorAll('.deck li'));
     var shuffled = shuffle(unshuffled);
@@ -68,6 +77,7 @@ function shuffleTheDeck () {
     }
 }
 
+// function to change the players attempts at matches and increment the counter up
 function incrementCounter() {
     attempts++;
     attemptCounter.innerHTML = attempts;
@@ -139,14 +149,17 @@ const StopWatch = function StopWatch() {
     }
 }
 
+// creation of a new instance of the StopWatch() function
 let watch = new StopWatch();
 
+// function to begin the timer and output the time in the HTML
 function startGameTimer() {
     watch.startTimer(function() {
         timer.innerText = watch.getTimeString();
     });
 }
 
+// function to stop the timer and output the time in HTML
 function stopGameTimer() {
     watch.stopTimer(function() {
         timer.innerText = watch.getTimeString();
@@ -154,7 +167,8 @@ function stopGameTimer() {
 }
 
 /* thanks to Asmaa & drunkenkismet on Slack for #fend_live_help posts - 
-   https://github.com/Zasmaa/memory-game-project-2/blob/master/JS/app.js */
+   https://github.com/Zasmaa/memory-game-project-2/blob/master/JS/app.js 
+   graphical star representation of how well the player did */
 function starRating() {
     if (attempts >= 18 && attempts < 25) {
         document.getElementById('firstStar').style.display = 'none';
@@ -163,6 +177,7 @@ function starRating() {
     }
 }
 
+// translation of the # of stars received into numerical text in the modal
 function modalStarCounter() {
     var three = 3;
     var two = 2;
@@ -178,7 +193,8 @@ function modalStarCounter() {
 }
 
 /* referenced Udacity scholar Sachin's "Modal Box" from P2 resources -
-   https://codepen.io/sachin03/pen/XYgLWP?editors=1010 */
+   https://codepen.io/sachin03/pen/XYgLWP?editors=1010 
+   modal window to present results to the player */
 function showModal() {
     modal.showModal();
     stopGameTimer();
@@ -193,15 +209,18 @@ function showModal() {
     modalCounter.innerHTML = "# of Flips: " + attempts;
 }
 
+// function to close the modal
 function closeModal() {
     modal.close();
 }
 
+// way to reset the players # of attempts counter
 function resetAttempts() {
     attempts = 0;
     document.querySelector('.attempts').innerHTML = attempts;
 }
 
+// way to reset the timer for another game
 function resetTime() {
     timer.innerText = '00:00:00';
     watch.resetTimer(function() {
@@ -209,6 +228,7 @@ function resetTime() {
     });
 }
 
+// function to reset visual star representation with a reset
 function resetStars() {
     if (document.getElementById('firstStar').style.display === 'none' || 
         document.getElementById('secondStar').style.display === 'none') {
@@ -218,17 +238,19 @@ function resetStars() {
     }
 }
 
+// function to count matches
 function incrementMatch () {
     allMatches += 1;
-    win();
 }
 
+// function to check for a win
 function win() {
     if (allMatches == 8) {
         showModal();
     }
 }
 
+// function holding the methods to restart the game
 function resetGame() {
     closeModal();
     resetTime();
