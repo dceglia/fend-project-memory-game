@@ -1,6 +1,6 @@
 
 /* Thanks to Mike Wales and Ryan Waite for their P2 webinars - 
-   referenced repetitively!! */
+   referenced repetitively */
 
 // empty array to load cards in
 var cardArray = [];
@@ -68,7 +68,7 @@ function shuffle(array) {
     return array;
 }
 
-// implementing shuffle() on the deck
+// implementing provided shuffle function on the deck
 function shuffleTheDeck () {
     var unshuffled = [].slice.call(document.querySelectorAll('.deck li'));
     var shuffled = shuffle(unshuffled);
@@ -77,13 +77,13 @@ function shuffleTheDeck () {
     }
 }
 
-// function to change the players attempts at matches and increment the counter up
+// function to increment the attempt counter up
 function incrementCounter() {
     attempts++;
     attemptCounter.innerHTML = attempts;
 }
 
-/* StopWatch function from Udacity scholar Ryan Waite's "Script Store" 
+/* StopWatch function from Udacity scholar Ryan Waite's "Script Store" -
    https://github.com/ryanwaite28/script-store/blob/master/js/stop-watch.js */
 const StopWatch = function StopWatch() {
     const self = this;
@@ -250,12 +250,25 @@ function win() {
     }
 }
 
+/* referenced W3 schools example to figure out how to loop through the cards -
+https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_queryselectorall_loop_p */
+function resetAfterWin() {
+    var allCards = document.querySelectorAll('.deck li');
+    var i;
+    for (i = 0; i < allCards.length; i++) {
+        allCards[i].className = 'card';
+    }
+}
+
 // function holding the methods to restart the game
 function resetGame() {
+    allMatches = 0;
+
     closeModal();
     resetTime();
     resetAttempts();
     resetStars();
+    resetAfterWin();
     shuffleTheDeck();
 }
 
