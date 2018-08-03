@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Matching Game</title>
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -27,7 +28,12 @@
         	<span class="attempts">0</span> Attempts
 
             <div id="restart-button" class="restart">
-        		<i class="fa fa-repeat" onclick="resetGame()"></i>
+                <i class="fa fa-repeat" id='resetLink'></i>
+                <script type="text/javascript">
+                    document.getElementById('resetLink').onclick = function() {
+                        resetGame();
+                    }
+                </script>
         	</div>
         </section>
 

@@ -20,8 +20,7 @@ var allMatches = 0;
    https://matthewcranford.com/memory-game-walkthrough-part-1-setup/ 
    method for flipping cards over*/
 function clickCard(click) {
-    click.classList.add('open');
-    click.classList.add('show');
+    click.classList.add('open', 'show');
 }
 
 // method to push to the array
@@ -31,8 +30,7 @@ function addClickedCard(click) {
 
 // method to flip cards face down
 function hideCard(click) {
-    click.classList.remove('open');
-    click.classList.remove('show');
+    click.classList.remove('open', 'show');
 }
 
 /* method to distinguish between matches (by adding the match class) 
@@ -70,7 +68,7 @@ function shuffle(array) {
 
 // implementing provided shuffle function on the deck
 function shuffleTheDeck () {
-    var unshuffled = [].slice.call(document.querySelectorAll('.deck li'));
+    var unshuffled = Array.from(document.querySelectorAll('.deck li'));
     var shuffled = shuffle(unshuffled);
     for (card of shuffled) {
         deck.appendChild(card);
@@ -263,6 +261,7 @@ function resetAfterWin() {
 // function holding the methods to restart the game
 function resetGame() {
     allMatches = 0;
+    cardArray = [];
 
     closeModal();
     resetTime();
@@ -270,6 +269,8 @@ function resetGame() {
     resetStars();
     resetAfterWin();
     shuffleTheDeck();
+
+
 }
 
 shuffleTheDeck();

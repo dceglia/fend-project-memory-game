@@ -8,7 +8,8 @@ Welcome to my Udacity FEND Project 2 repository. Starting with the provided HTML
 
 * [General](#)
 * [Instructions](#instructions)
-* [How to](*how to)
+* [How to](#how to)
+* [Dependencies](#dependencies)
 * [Contributing](#contributing)
 * [Credits](#credits)
 
@@ -23,6 +24,10 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 ## How To
 
 The memory game is played by flipping cards over 2 at a time. When a match is found those cards remain face up. When all cards are face up the player has won and the game has completed.
+
+## Dependencies
+
+This page uses the Coda font (can be found here: https://fonts.google.com/specimen/Coda) from Google Fonts and Font Awesome (https://fontawesome.com/) for help with icons. Note: I believe Font Awesome has updated to ver. 5.2.
 
 ## Contributing
 
